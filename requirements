@@ -1,0 +1,21 @@
+The "Third Eye for Blind" project involves the use of specific hardware and software components to build the electronic system. Here's an overview of the hardware and software used:
+
+Hardware:
+1. PIC Microcontroller (PIC16F877A): The project utilizes the PIC16F877A microcontroller as the main control unit. It features various functionalities such as EEPROM data memory, analog-to-digital converters, comparators, and communication ports.
+
+2. Power Unit: The power unit consists of a 9V battery and a 7805 IC voltage regulator. The battery provides the power source, while the voltage regulator ensures a stable 5V output for the microcontroller and other components.
+
+3. Ultrasonic Sensor: The obstacle sensing unit employs an ultrasonic sensor, which includes a transmitter, receiver, and transceiver. It utilizes soundwaves to detect obstacles and convert them into electrical signals for further processing.
+
+4. Indicating Units: The indicating unit comprises components such as LEDs, a buzzer, and a vibration motor. These elements provide visual, auditory, and tactile feedback to the user, indicating the presence of obstacles.
+
+Software:
+1. MicroC: The code for programming the PIC microcontroller is written using the MicroC language. MicroC is a C compiler specifically designed for microcontrollers.
+
+2. Integrated Development Environment (IDE): An IDE, such as MPLAB X IDE or MicroC PRO for PIC, is used to write, compile, and debug the code for the microcontroller. These IDEs provide a development environment tailored for microcontroller programming.
+
+3. Microcontroller Libraries: The code may utilize specific libraries provided by the microcontroller manufacturer or third-party libraries that offer functions and drivers for controlling the microcontroller's peripherals and features.
+
+4. Compiler and Programmer: A suitable compiler compatible with the MicroC language is required to compile the code into machine-readable instructions for the microcontroller. Additionally, a suitable programmer is needed to transfer the compiled code from the computer to the microcontroller for execution.
+
+It's important to note that the specific models and brands of the hardware components and software tools can vary based on personal preferences, availability, and project requirements.
