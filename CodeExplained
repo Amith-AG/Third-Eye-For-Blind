@@ -1,0 +1,61 @@
+This code is written in MicroC and is used to program a PIC microcontroller for the "Third Eye for Blind" project. Let's go through the code step by step:
+
+```c
+void main()
+{
+  int a;
+  TRISB = 0b00010000;    // RB4 as Input PIN (ECHO)
+  TRISC = 0b00000000;
+  PORTC = 0x00;
+  Delay_ms(3000);
+  T1CON = 0x10;          // Initialize Timer Module
+```
+In the `main` function, variables are declared, and the configuration of input/output pins is set. `TRISB` is configured to make RB4 as an input pin to receive the echo signal. `TRISC` is set as an output port for indicating units. `PORTC` is initially cleared to 0x00. A delay of 3 seconds (3000 milliseconds) is inserted using `Delay_ms(3000)`. `T1CON` is initialized to 0x10 to configure the Timer 1 module.
+
+```c
+  while(1)
+  {
+    TMR1H = 0;           // Sets the Initial Value of Timer
+    TMR1L = 0;
+    PORTC = 0x00;
+    PORTB.F0 = 1;        // TRIGGER HIGH
+    Delay_us(10);        // 10uS Delay
+    PORTB.F0 = 0;        // TRIGGER LOW
+```
+The code then enters an infinite loop with `while(1)`. In each iteration, the Timer values (`TMR1H` and `TMR1L`) are set to zero, indicating the start of a new timing cycle. `PORTC` is set to 0x00, clearing any previous indication. The Trigger pin (`PORTB.F0`) is set to high (1) for a short duration by using `Delay_us(10)` microseconds. Then, it is set low (0) to trigger the ultrasonic sensor.
+
+```c
+    while (!PORTB.F4);   // Waiting for Echo
+    T1CON.F0 = 1;        // Timer Starts
+    while (PORTB.F4);    // Waiting for Echo goes LOW
+    T1CON.F0 = 0;        // Timer Stops
+```
+The code then waits in a loop until the Echo pin (`PORTB.F4`) becomes high, indicating the start of the echo signal. Once the echo is received, the Timer is started by setting `T1CON.F0` to 1. The code then waits until the echo signal goes low, indicating the end of the echo.
+
+```c
+    a = (TMR1L | (TMR1H << 8));   // Reads Timer Value
+    a = a / 58.82;                // Converts Time to Distance
+    a = a + 1;                    // Distance Calibration
+
+    if (a >= 0 && a <= 50)
+    {
+      PORTC = 0xFF;               // Indicate obstacle presence
+    }
+    else
+    {
+      PORTC = 0x00;               // No obstacle detected
+    }
+
+    Delay_ms(500);
+  }
+}
+```
+After the echo signal ends, the Timer value is read by combining `TMR1L` and `TMR1H`. The value is then converted from time to distance by dividing it by 58.82. A distance calibration of +1 is applied.
+
+Based on the calculated distance, the code determines whether an obstacle is detected. If the distance is between 0 and 50 (indicating a
+
+ close-range obstacle), `PORTC` is set to 0xFF, indicating the presence of an obstacle. Otherwise, if the distance is beyond 50, `PORTC` is set to 0x00, indicating no obstacle.
+
+After the decision is made and the indication is set, the code introduces a delay of 500 milliseconds using `Delay_ms(500)`, allowing for a pause before the next iteration of the loop.
+
+This code continuously performs obstacle detection, updates the indication on `PORTC`, and repeats the process indefinitely.
