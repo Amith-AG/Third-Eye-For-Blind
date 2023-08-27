@@ -1,4 +1,5 @@
-eThe "Third Eye for Blind" electronic project aims to assist visually impaired individuals by offering real-time obstacle detection and notification. The project consists of four key block units: the microcontroller unit, power unit, obstacle sensing unit, and indicating unit.
+# Third Eye for Blind
+The "Third Eye for Blind" electronic project aims to assist visually impaired individuals by offering real-time obstacle detection and notification. The project consists of four key block units: the microcontroller unit, power unit, obstacle sensing unit, and indicating unit.
 
 The microcontroller unit utilizes the powerful PIC16F877A microcontroller, which boasts features such as EEPROM data memory, self-programming, analog-to-digital converters, comparators, and versatile communication ports. This unit serves as the central component for sensing and controlling objects in real-time environments.
 
